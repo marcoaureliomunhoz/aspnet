@@ -1,0 +1,40 @@
+﻿@model WebApp.ViewModels.EditoraViewModel
+
+@{
+    ViewBag.Title = "Altera Editora";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Editoras", "Index", "Editoras")</li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Title</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            if (!ViewData.ModelState.IsValid)
+            {
+                <ul><strong>Atenção</strong>
+                    @Html.ValidationSummary()
+                </ul>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.EditoraId)
+                @Html.TextBoxFor(x => x.EditoraId, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Nome)
+                @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", @autofocus = "true" })
+                @Html.ValidationMessageFor(x => x.Nome)
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        }
+    </div>
+</div>

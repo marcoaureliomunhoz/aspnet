@@ -1,0 +1,19 @@
+﻿@model WebApp.Models.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Home/Login";
+}
+
+<h1>Login</h1>
+
+<form asp-controller="Home" asp-action="Login" method="post">
+    <label>Nome</label><br />
+    <input asp-for="Nome" /><br />
+    <span asp-validation-for="Nome" class="text-danger"></span><br /><br />
+
+    <label>Permissão</label><br />
+    <input asp-for="Permissao" /><br />
+    <span asp-validation-for="Permissao" class="text-danger"></span><br /><br />
+
+    <button type="submit">Logar</button>
+</form>

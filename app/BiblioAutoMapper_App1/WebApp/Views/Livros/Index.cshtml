@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApp.ViewModels.LivroViewModel>
+
+@{
+    ViewBag.Title = "Livros";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Title</h3>
+        @Html.ActionLink("Novo", "Novo", null, new { @class = "btn btn-primary btn-sm", @style = "position:relative;float:right;top:-23px;" })
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Código</td>
+                    <td>Título</td>
+                    <td>Editora</td>
+                    <td style="width:140px;">&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var livro in Model)
+                {
+                <tr>
+                    <td>@livro.LivroId</td>
+                    <td>@livro.Titulo</td>
+                    <td>@(livro.Editora?.Nome ?? "")</td>
+                    <td>
+                        @Html.ActionLink("Alterar", "Alterar", new { id = livro.LivroId }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Excluir", "Excluir", new { id = livro.LivroId }, new { @class = "btn btn-info btn-sm" })
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

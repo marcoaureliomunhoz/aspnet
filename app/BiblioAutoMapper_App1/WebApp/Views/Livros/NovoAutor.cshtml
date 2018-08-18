@@ -1,0 +1,45 @@
+﻿@model WebApp.ViewModels.NovoLivroAutorViewModel
+
+@{
+    ViewBag.Title = $"Novo Autor Livro {Model.Titulo}";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Livros", "Index", "Livros")</li>
+    <li>@Html.ActionLink("Livro", "Alterar", "Livros", new { id = Model.LivroId }, null)</li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Title</h3>
+    </div>
+    <div class="panel-body">
+        @if (Model.Autores == null || Model.Autores.Count == 0)
+        {
+            <span>Nenhum autor disponível.</span>
+        }
+        else
+        {
+            using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.LivroId)
+
+                for (int i = 0; i < Model.Autores.Count(); i++)
+                {
+                <div>
+                    @Html.CheckBoxFor(x => x.Autores[i].Selected)
+                    @Html.HiddenFor(x => x.Autores[i].AutorId)
+                    @Html.HiddenFor(x => x.Autores[i].Nome)
+                    @Html.DisplayFor(x => x.Autores[i].Nome)
+                </div>
+                }
+
+                <hr />
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            }
+        }
+    </div>
+</div>

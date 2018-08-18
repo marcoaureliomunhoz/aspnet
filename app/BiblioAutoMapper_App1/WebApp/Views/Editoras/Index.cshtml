@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApp.ViewModels.EditoraViewModel>
+
+@{
+    ViewBag.Title = "Editoras";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Title</h3>
+        @Html.ActionLink("Novo", "Novo", null, new { @class = "btn btn-primary btn-sm", @style = "position:relative;float:right;top:-23px;" })
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Código</td>
+                    <td>Nome</td>
+                    <td style="width:140px">&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var editora in Model)
+                {
+                    <tr>
+                        <td>@editora.EditoraId</td>
+                        <td>@editora.Nome</td>
+                        <td>
+                            @Html.ActionLink("Alterar", "Alterar", new { id = editora.EditoraId }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Excluir", "Excluir", new { id = editora.EditoraId }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

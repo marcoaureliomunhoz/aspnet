@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="btn-group-vertical" role="group" aria-label="..." style="width:100%">
+    @Html.ActionLink("Editoras", "Index", "Editoras", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
+    @Html.ActionLink("Autores", "Index", "Autores", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
+    @Html.ActionLink("Livros", "Index", "Livros", null, htmlAttributes: new { @class = "btn btn-default", @style = "width:100%" })
+</div>

@@ -1,0 +1,73 @@
+﻿@model WebApp.ViewModels.LivroViewModel
+
+@{
+    ViewBag.Title = "Altera Livro";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Livros", "Index", "Livros")</li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@ViewBag.Title</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(x => x.LivroId)
+                @Html.TextBoxFor(x => x.LivroId, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Titulo)
+                @Html.TextBoxFor(x => x.Titulo, new { @class = "form-control", @autofocus = "true" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.EditoraId)
+                @Html.DropDownListFor(x => x.EditoraId,
+                        new SelectList(Model.ListEditoras, "EditoraId", "Nome", (object)Model.EditoraId),
+                        new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        }
+    </div>
+</div>
+
+@if (Model.LivroId > 0)
+{
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Autores</h3>
+        @Html.ActionLink("Novo", "NovoAutor", new { livroId = Model.LivroId }, new { @class = "btn btn-info btn-sm", @style = "position:relative;float:right;top:-23px;" })
+    </div>
+    <div class="panel-body">
+        @if (Model.Autores != null && Model.Autores.Count > 0)
+        {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Código</td>
+                    <td>Nome</td>
+                    <td style="width:140px;">&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var autor in Model.Autores)
+                {
+                    <tr>
+                        <td>@autor.AutorId</td>
+                        <td>@autor.Nome</td>
+                        <td style="text-align:right">
+                            @Html.ActionLink("Excluir", "ExcluirAutor", new { livroId = Model.LivroId, autorId = autor.AutorId }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+}
