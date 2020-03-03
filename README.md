@@ -1,5 +1,59 @@
 # ASP.NET 
 
+### **Core 3.1**
+
+**Recursos:**
+
+* Várias melhorias para Blazor.
+
+**Referências:**
+
+* https://docs.microsoft.com/pt-br/aspnet/core/release-notes/aspnetcore-3.1
+
+---
+
+### **Core 3.0**
+
+**Recursos:**
+
+* Blazor.
+* gRPC (Remote Procedure Call - Chamada de Procedimento Remoto).
+* Melhorias no SignalR.
+* Novo padrão de serialização JSON nativo, otimizado para texto UTF-8, que entra no lugar do Newtonsoft.JSON.
+* Novas diretivas do Razor.
+* Host genérico (HostBuilder) agora substitui o WebHostBuilder. Isso facilita a disponibilização de aplicações asp.net core em hosts mais diversos, e não só em web.
+* EventCounters.
+* Melhorias no motor de roteamento. Agora você consegue configurar cada ponto de extremidade.
+* Verificações de integridade (HealthCheck).
+* Relatório de erros aprimorado no IIS.
+* Novo tipo de template para Worker Service (tarefas em segundo plano). Esse tipo de aplicação pode ser usado para executar tarefas de longa duração ou "pesadas" em segundo plano.
+* Melhorias de desempenho, que reduzem o uso de memória e melhoram a taxa de transferência.
+
+**Referências:**
+
+* https://docs.microsoft.com/pt-br/aspnet/core/release-notes/aspnetcore-3.0
+* https://github.com/aspnet/Announcements/issues/325
+
+---
+
+### **Core 2.2** 
+
+**Recursos:** 
+
+* Ferramentas e experiências de runtime aprimoradas para a criação de documentos do OpenAPI (também conhecido como Swagger).
+* Novo motor de roteamento MVC.
+* Novo serviço de verificações de integridade (HealthCheck). Esses serviços são usados por orquestradores de conteineres ou balanceadores de carga.
+* Suporte ao HTTP/2.
+* Agora o aplicativo pode ser hospedado como processo do IIS. Antes o aplicativo ficava atrás do IIS que funcionava como um proxy reverso. Agora a hospedagem é "dentro" do IIS e não "fora".
+* Melhorias no Middleware do CORS.
+* Compactação de resposta no formato Brotli.
+
+**Referências:**  
+* https://docs.microsoft.com/pt-br/aspnet/core/release-notes/aspnetcore-2.2 
+* https://github.com/dotnet/aspnetcore/releases/tag/2.2.0 
+
+--- 
+
 ### **Core 2.1** 
 
 **Recursos:** 
@@ -43,6 +97,7 @@
 
 **Fontes** 
 
+* https://docs.microsoft.com/pt-br/aspnet/core/
 * https://github.com/aspnet/Home
 * https://github.com/aspnet/Home/wiki/Roadmap
 * https://docs.microsoft.com/en-us/aspnet/index 
