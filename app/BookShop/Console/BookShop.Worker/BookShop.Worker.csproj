@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-BookShop.Worker-2F44CECA-6DBD-464A-AACB-AFDEEDD4CE12</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookShop.Domain\BookShop.Domain.csproj" />
+    <ProjectReference Include="..\BookShop.Infra.Messaging\BookShop.Infra.Messaging.csproj" />
+    <ProjectReference Include="..\BookShop.Infra.Net\BookShop.Infra.Net.csproj" />
+    <ProjectReference Include="..\BookShop.Infra.Ioc\BookShop.Infra.Ioc.csproj" />
+  </ItemGroup>
+</Project>
