@@ -54,6 +54,7 @@ namespace BookShop.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error at AvaliableStatus");
                 return BadRequest(ResultFactory.Error(ex.Message));
             }
         }

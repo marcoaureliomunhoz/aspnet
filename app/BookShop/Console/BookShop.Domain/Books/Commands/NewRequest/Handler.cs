@@ -23,6 +23,7 @@ namespace BookShop.Domain.Books.Commands.NewRequest
             _mediator = mediator;
             _webServices = webServices;
             _httpService = httpService;
+            LoadWebService();
         }
 
         private void LoadWebService()
@@ -30,11 +31,12 @@ namespace BookShop.Domain.Books.Commands.NewRequest
             var webService = _webServices.List.FirstOrDefault();
             var service = webService.Services.FirstOrDefault();
             var action = service.Actions.FirstOrDefault();
-            _urlBase = webService.Url + service.Url + action.Url;
+            _urlBase = webService.Url + "/" + service.Url + "/" + action.Url;
         }
         
         public async Task Handle(NewRequest.Notification notification, CancellationToken cancellationToken)
         {
+            System.Console.WriteLine($"  Post {_urlBase}");
             var response = await _httpService.PostAsync<NewRequest.Notification, Result<bool>>(
                 _urlBase,
                 notification
@@ -42,6 +44,7 @@ namespace BookShop.Domain.Books.Commands.NewRequest
 
             if (response != null && !response.HasMessage && response.Data)
             {
+                System.Console.WriteLine("      Publish NewRequestApproved notification...");
                 await _mediator.Publish(new NewRequestApproved.Notification
                 {
                     BookId = notification.BookId,
@@ -50,6 +53,7 @@ namespace BookShop.Domain.Books.Commands.NewRequest
             }
             else
             {
+                System.Console.WriteLine("      Publish NewRequestDisapproved notification...");
                 await _mediator.Publish(new NewRequestDisapproved.Notification
                 {
                     BookId = notification.BookId,

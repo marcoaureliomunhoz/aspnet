@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using BookShop.Infra.Net.Models;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace BookShop.Infra.Net.Services
 {
@@ -9,9 +9,11 @@ namespace BookShop.Infra.Net.Services
     {
         public static WebServicesConfiguration GetConfig(IConfiguration configuration)
         {
-            return new WebServicesConfiguration
+            var list = new List<WebService>();
+            configuration.GetSection("WebServices").Bind(list);
+            return new WebServicesConfiguration()
             {
-                List = JsonConvert.DeserializeObject<IEnumerable<WebService>>(configuration.GetSection("WebServices").Value)
+                List = list
             };
         }
     }

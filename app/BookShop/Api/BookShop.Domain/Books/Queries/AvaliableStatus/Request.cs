@@ -6,6 +6,7 @@ namespace BookShop.Domain.Books.Queries.AvaliableStatus
     public class Request : Validatable, IRequest<Result<bool>>
     {
         public int BookId { get; set; }
+        public int Quantity { get; set; }
 
         public override void Validate()
         {

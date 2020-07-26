@@ -17,4 +17,8 @@
     <ProjectReference Include="..\BookShop.Infra.Net\BookShop.Infra.Net.csproj" />
     <ProjectReference Include="..\BookShop.Infra.Ioc\BookShop.Infra.Ioc.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.json" CopyToPublishDirectory="Always" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 </Project>

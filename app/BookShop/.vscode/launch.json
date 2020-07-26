@@ -5,14 +5,36 @@
    "version": "0.2.0",
    "configurations": [
         {
+           "name": ".NET Core Launch (console)",
+           "type": "coreclr",
+           "request": "launch",
+           "preLaunchTask": "build-console",
+           "program": "${workspaceFolder}/Console/BookShop.Console/bin/Debug/netcoreapp3.1/BookShop.Console.dll",
+           "args": [],
+           "cwd": "${workspaceFolder}/Console/BookShop.Console",
+           "stopAtEntry": false,
+           "console": "integratedTerminal"
+        },
+        {
+            "name": ".NET Core Launch (worker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-worker",
+            "program": "${workspaceFolder}/Console/BookShop.Worker/bin/Debug/netcoreapp3.1/BookShop.Worker.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Console/BookShop.Worker",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-api",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/BookShop.Api/bin/Debug/netcoreapp3.1/BookShop.Api.dll",
+            "program": "${workspaceFolder}/Api/BookShop.Api/bin/Debug/netcoreapp3.1/BookShop.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/BookShop.Api",
+            "cwd": "${workspaceFolder}/Api/BookShop.Api",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
@@ -23,7 +45,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
+                "/Views": "${workspaceFolder}/Api/Views"
             }
         },
         {

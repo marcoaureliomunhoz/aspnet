@@ -58,7 +58,7 @@ namespace BookShop.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookShop API V1");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

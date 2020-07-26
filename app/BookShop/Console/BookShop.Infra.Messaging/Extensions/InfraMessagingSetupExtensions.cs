@@ -8,10 +8,20 @@ namespace BookShop.Infra.Messaging.Extensions
 {
     public static class InfraMessagingSetupExtensions
     {
-        public static IServiceCollection AddInfraMessaging(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddConsumerInfraMessaging(this IServiceCollection services, IConfiguration configuration)
         {
             var consumerConfig = ConsumerConfigProvider.GetConfig(configuration);
-            services.AddSingleton<IMessageConsumer>(new MessageConsumer(ConsumerFactory.Create(consumerConfig)));
+            services.AddSingleton<IMessageConsumer>(
+                new MessageConsumer(consumerConfig, ConsumerFactory.Create(consumerConfig), services));
+
+            return services;
+        }
+
+        public static IServiceCollection AddProducerInfraMessaging(this IServiceCollection services, IConfiguration configuration)
+        {
+            var producerConfig = ProducerConfigProvider.GetConfig(configuration);
+            services.AddSingleton<IMessageProducer>(new MessageProducer(producerConfig));
+
             return services;
         }
     }

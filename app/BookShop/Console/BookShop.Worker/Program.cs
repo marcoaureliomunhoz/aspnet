@@ -20,9 +20,7 @@ namespace BookShop.Worker
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<IServiceCollection>(services);
-                    services
-                        .AddBookShopMediatR()
-                        .AddJsonConfigurations();
+                    services.AddJsonConfigurations();
                     services.AddHostedService<Worker>();
                 });
     }

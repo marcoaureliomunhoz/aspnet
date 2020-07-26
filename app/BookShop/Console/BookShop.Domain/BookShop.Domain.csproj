@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookShop.Infra.Net\BookShop.Infra.Net.csproj" />
+    <ProjectReference Include="..\BookShop.Infra.Messaging\BookShop.Infra.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

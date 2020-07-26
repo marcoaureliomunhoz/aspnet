@@ -12,7 +12,6 @@ using BookShop.Infra.Messaging.Interfaces;
 using BookShop.Infra.Messaging.Models;
 using BookShop.Infra.Ioc;
 using BookShop.Domain.Books.Commands.NewRequest;
-using MediatR;
 using BookShop.Infra.Net.Extensions;
 
 namespace BookShop.Worker
@@ -22,21 +21,23 @@ namespace BookShop.Worker
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _configuration;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IMediator _mediator;
 
         public Worker(
             ILogger<Worker> logger,
             IConfiguration configuration,
-            IServiceCollection services,
-            IMediator mediator)
+            IServiceCollection services)
         {
             _logger = logger;
             _configuration = configuration;
-            _mediator = mediator;
 
             services
-                .AddInfraMessaging(configuration)
-                .AddInfraNet(configuration);
+                .AddConsumerInfraMessaging(configuration)
+                .AddProducerInfraMessaging(configuration)
+                .AddInfraNet(configuration)
+                .AddBookShopMediatR();
+
+            services.AddTransient<IMessageHandler<Request>, NewRequestMessageHandler>();
+            services.AddSingleton<IMessageErrorHandler, MessageErrorHandler>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
@@ -49,14 +50,11 @@ namespace BookShop.Worker
 
             var messageConsumer = _serviceProvider.GetService<IMessageConsumer>();
 
-            messageConsumer.Consume<Request>(
+            await messageConsumer.Consume<Request>(
                 new MessageConsumerConfiguration
                 {
                     Topic = "BookShop.NewRequest"
-                },
-                OnMessageValue,
-                OnMessageText,
-                OnError
+                }
             );
             
             _logger.LogInformation("[FINISH] Worker at {time}", DateTimeOffset.Now);
@@ -68,25 +66,6 @@ namespace BookShop.Worker
         {
             var messageConsumer = _serviceProvider.GetService<IMessageConsumer>();
             messageConsumer?.Deactive();
-        }
-
-        private void OnMessageValue(Request request)
-        {
-            _mediator.Publish(new Domain.Books.Commands.NewRequest.Notification
-            {
-                BookId = request.BookId,
-                Quantity = request.Quantity
-            });
-        }
-
-        private void OnMessageText(string text, Exception ex)
-        {
-            _logger.LogInformation(text, ex.Message);
-        }
-
-        private void OnError(Exception exception)
-        {
-            _logger.LogError(exception, exception.Message);
         }
     }
 }

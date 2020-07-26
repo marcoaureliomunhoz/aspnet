@@ -5,8 +5,8 @@ using MediatR;
 namespace BookShop.Domain.Common.Pipelines
 {
     public class ValidateCommand<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-       where TResponse : Result<TResponse>
-   {
+       where TResponse : class
+    {
       public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
       {
          if (request is Validatable validatable)
